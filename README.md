@@ -1,5 +1,9 @@
 ## GangOn Bot
 
+> 다른 레포지토리에서 작업하다가 이쪽으로 이동했습니다.
+> 
+> git commit 과거 history >> [링크](https://github.com/GangOn0215/study/commits/main/Discord_Bot/GangOn_Bot)
+
 ### ❄️ 2023.12.31
 
 > 내 서버에서 테스트 할려고 쓸 용도로 만든 discord bot
