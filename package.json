@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.jk",
+  "scripts": {
+    "start:dev": "npx nodemon ./src/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.3",
+    "discord.js": "^14.14.1"
+  },
+  "type": "module",
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
