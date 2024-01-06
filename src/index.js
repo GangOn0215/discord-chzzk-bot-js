@@ -151,11 +151,10 @@ client.on("interactionCreate", async (interaction) => {
 
       const channelLiveDetail = new LiveDetail(channelID);
 
-      result = await channelLiveDetail.getAxiosLiveDetail();
+      result = await channelLiveDetail.getLiveDetail();
 
       // Success
       if (result.status) {
-        console.log(channelLiveDetail.liveImageUrl);
         // { name: "\u200B", value: "\u200B" },
         interaction.reply({
           embeds: [
@@ -196,11 +195,11 @@ client.on("interactionCreate", async (interaction) => {
             },
           ],
         });
+
+        console.log(`${interaction.user.globalName}님이 라이브 여부를 확인`);
       } else {
         interaction.reply(`ERROR: ${result.error}`);
       }
-
-      console.log(channelLiveDetail);
 
       break;
   }

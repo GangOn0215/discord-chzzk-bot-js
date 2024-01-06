@@ -38,7 +38,37 @@ class LiveDetail extends ChzzkApi {
     return this.channelID;
   }
 
-  async getAxiosLiveDetail() {
+  getAxiosLiveDetail() {
+    return new Promise((reslove, reject) => {
+      axios({
+        method: "get",
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          "Content-Type": "application/json",
+        },
+        url: `${this.baseURL}/service/v2/channels/${this.channelID}/live-detail`,
+      })
+        .then((res) => {
+          // 통신이 성공적
+          if (res.data.code !== 200) {
+            reject(res.data.message);
+
+            return;
+          }
+
+          reslove(res);
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error);
+        });
+    });
+  }
+
+  async getLiveDetail() {
+    let response;
+
     try {
       const chennelInfo = await this.getAxiosChannelInfo(this.channelID);
 
@@ -51,31 +81,29 @@ class LiveDetail extends ChzzkApi {
         return result;
       }
 
-      const response = await axios(
-        `${this.baseURL}/service/v1/channels/${this.channelID}/live-detail`
-      );
-
-      if (response.data.code === 200) {
-        this.setLiveDetail(response.data.content);
-
-        const result = {
-          status: false,
-          error: "방송중이 아닙니다.",
-        };
-
-        if (this.status === "OPEN") {
-          result["status"] = true;
-
-          this.setLiveDetail(response.data.content);
-        }
-
-        return result;
-      }
+      response = await this.getAxiosLiveDetail();
     } catch (error) {
       const result = {
         status: false,
         error: error,
       };
+
+      return result;
+    }
+
+    if (response.data.code === 200) {
+      this.setLiveDetail(response.data.content);
+
+      const result = {
+        status: false,
+        error: "방송중이 아닙니다.",
+      };
+
+      if (this.status === "OPEN") {
+        result["status"] = true;
+
+        this.setLiveDetail(response.data.content);
+      }
 
       return result;
     }

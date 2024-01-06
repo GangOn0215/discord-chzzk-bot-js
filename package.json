@@ -7,7 +7,8 @@
   },
   "dependencies": {
     "axios": "^1.6.3",
-    "discord.js": "^14.14.1"
+    "discord.js": "^14.14.1",
+    "mysql": "^2.18.1"
   },
   "type": "module",
   "devDependencies": {
