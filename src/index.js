@@ -1,4 +1,16 @@
 import { config } from "dotenv";
+import mysql from "mysql";
+
+import { dbConfig } from "./utils/dbConfig.js";
+
+const connection = mysql.createConnection(dbConfig);
+
+connection.connect((err) => {
+  if (err) throw err;
+
+  console.log("mysql connected");
+});
+
 import {
   ButtonStyle,
   Client,
